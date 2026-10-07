@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+const ASSETS = `${import.meta.env.BASE_URL}assets/`;
+
 const EVENT = {
   date: "Sabado 31 de octubre",
   time: "9:00 PM & Hasta la hora de las brujas",
@@ -52,8 +54,9 @@ const SECTIONS: Section[] = [
   {
     id: "rsvp",
     title: "CONFIRMA TU ASISTENCIA",
-    subtitle: "Cuentanos si podras venir.",
-    cta: "AHI ESTARE",
+    subtitle: "Esperamos asustarte en esta noche de terror y diversion.",
+    // subtitle: "Cuentanos si podras venir.",
+    // cta: "AHI ESTARE",
   },
 ];
 
@@ -159,7 +162,7 @@ export default function Home() {
         const clown = clownRef.current;
         const frames = Array.from({ length: 7 }, (_, i) => {
           const n = String(6 - i).padStart(3, "0");
-          return `/assets/sprites/clown/frame_${n}.png`;
+          return `${ASSETS}sprites/clown/frame_${n}.png`;
         });
 
         frames.forEach((src) => {
@@ -209,7 +212,7 @@ export default function Home() {
           playsInline
           preload="auto"
         >
-          <source src="/assets/videos/circus-background.mp4" type="video/mp4" />
+          <source src={`${ASSETS}videos/circus-background.mp4`} type="video/mp4" />
         </video>
 
         <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-black/30 to-black/80" />
@@ -221,7 +224,7 @@ export default function Home() {
         <img
           ref={clownRef}
           className="pointer-events-none absolute -bottom-15 -left-15 h-[70vh] w-auto"
-          src="/assets/sprites/clown/frame_006.png"
+          src={`${ASSETS}sprites/clown/frame_006.png`}
           alt=""
         />
 
