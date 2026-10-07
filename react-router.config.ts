@@ -1,6 +1,7 @@
 import type { Config } from "@react-router/dev/config";
 
 export default {
-  // SPA mode: static `index.html` that hydrates in the browser (GitHub Pages friendly)
-  ssr: false,
+  // Prerender to a static index.html so GitHub Pages serves a fully rendered page
+  ssr: true,
+  prerender: ["/"],
 } satisfies Config;
