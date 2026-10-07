@@ -57,6 +57,8 @@ const SECTIONS: Section[] = [
   },
 ];
 
+const SECTIONS_SCROLL = 60;
+
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Invitación de Halloween" },
@@ -72,6 +74,7 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const moodRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLDivElement>(null);
+  const clownRef = useRef<HTMLImageElement>(null);
 
   useGSAP(
     () => {
@@ -113,6 +116,8 @@ export default function Home() {
         },
       });
 
+      const PANELS_START = 1;
+
       panels.forEach((panel, i) => {
         const reveals = gsap.utils.toArray<HTMLElement>("[data-reveal]", panel);
 
@@ -120,7 +125,7 @@ export default function Home() {
           panel,
           { autoAlpha: 0, y: 48, scale: 0.94 },
           { autoAlpha: 1, y: 0, scale: 1, duration: 0.14 },
-          i,
+          PANELS_START + i,
         );
 
         reveals.forEach((el, j) => {
@@ -128,7 +133,7 @@ export default function Home() {
             el,
             { autoAlpha: 0, y: 28 },
             { autoAlpha: 1, y: 0, duration: 0.14 },
-            i + 0.05 + j * 0.22,
+            PANELS_START + i + 0.05 + j * 0.22,
           );
         });
 
@@ -136,7 +141,7 @@ export default function Home() {
           master.to(
             panel,
             { autoAlpha: 0, y: -48, scale: 1.06, duration: 0.16 },
-            i + 0.84,
+            PANELS_START + i + 0.84,
           );
         }
       });
@@ -147,13 +152,42 @@ export default function Home() {
       // }
 
       if (hintRef.current) {
-        master.fromTo(
-          hintRef.current,
-          { autoAlpha: 0 },
-          { autoAlpha: 1, duration: 0.08 },
-          0.02,
-        );
         master.to(hintRef.current, { autoAlpha: 0, duration: 0.12 }, 0.5);
+      }
+
+      if (clownRef.current) {
+        const clown = clownRef.current;
+        const frames = Array.from({ length: 7 }, (_, i) => {
+          const n = String(6 - i).padStart(3, "0");
+          return `/assets/sprites/clown/frame_${n}.png`;
+        });
+
+        frames.forEach((src) => {
+          const img = new Image();
+          img.src = src;
+        });
+
+        gsap.set(clown, { autoAlpha: 1, scale: 0.9 });
+        master.set(clown, { autoAlpha: 1, scale: 0.9 }, 0);
+
+        const FRAME_START = 0.03;
+        const FRAME_SPAN = 0.2;
+        let lastFrame = -1;
+        const swapFrame = (t: number) => {
+          const p = Math.min(1, Math.max(0, (t - FRAME_START) / FRAME_SPAN));
+          const idx = Math.round(p * (frames.length - 1));
+          if (idx !== lastFrame) {
+            lastFrame = idx;
+            clown.src = frames[idx];
+          }
+        };
+        master.eventCallback("onUpdate", () => swapFrame(master.time()));
+
+        master.to(
+          clown,
+          { scale: 6, autoAlpha: 0, duration: 1, ease: "none" },
+          0.2,
+        );
       }
 
       return () => cleanup?.();
@@ -165,7 +199,7 @@ export default function Home() {
     <main
       ref={containerRef}
       className="relative"
-      style={{ height: `${SECTIONS.length * 100}vh` }}
+      style={{ height: `${SECTIONS.length * SECTIONS_SCROLL}vh` }}
     >
       <div className="sticky top-0 h-dvh w-dvw overflow-hidden flex items-center justify-center">
         <video
@@ -178,10 +212,17 @@ export default function Home() {
           <source src="/assets/videos/circus-background.mp4" type="video/mp4" />
         </video>
 
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/80" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-black/30 to-black/80" />
         <div
           ref={moodRef}
           className="pointer-events-none absolute inset-0 bg-black opacity-0"
+        />
+
+        <img
+          ref={clownRef}
+          className="pointer-events-none absolute -bottom-15 -left-15 h-[70vh] w-auto"
+          src="/assets/sprites/clown/frame_006.png"
+          alt=""
         />
 
         {SECTIONS.map((section) => (
@@ -229,9 +270,24 @@ export default function Home() {
 
         <div
           ref={hintRef}
-          className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-semibold uppercase tracking-[0.5em] text-white/60 opacity-0"
+          className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3"
         >
-          Desliza para entrar
+          <span className="text-xs font-semibold uppercase tracking-[0.4em] text-white/80 [text-shadow:0_0_12px_rgba(0,0,0,0.9)]">
+            Desliza para entrar
+          </span>
+          <svg
+            className="h-8 w-8 animate-bounce text-red-200/90 drop-shadow-[0_0_8px_rgba(150,0,0,0.6)]"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 5l0 14" />
+            <path d="M19 12l-7 7-7-7" />
+          </svg>
         </div>
       </div>
     </main>
