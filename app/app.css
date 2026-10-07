@@ -1,8 +1,104 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "QuentinCaps";
+  src: url("/assets/fonts/QuentinCaps.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display: "QuentinCaps", ui-serif, Georgia, serif;
+}
+
+.font-display {
+  line-height: 1.1;
+}
+
+.blood-text {
+  color: transparent;
+  background-color: #efe6da;
+  background-image:
+    /* droplets */
+    radial-gradient(
+        ellipse 1.4% 6% at 36% 30%,
+        #a30b0b 0 100%,
+        transparent 101%
+      ),
+    radial-gradient(
+        ellipse 1.2% 5% at 64% 22%,
+        #8f0505 0 100%,
+        transparent 101%
+      ),
+    radial-gradient(
+        ellipse 1.3% 5.5% at 80% 44%,
+        #7f0000 0 100%,
+        transparent 101%
+      ),
+    radial-gradient(
+        ellipse 1.1% 4.5% at 20% 40%,
+        #9c0000 0 100%,
+        transparent 101%
+      ),
+    /* drips */
+    radial-gradient(
+        ellipse 1.8% 58% at 24% 100%,
+        #7f0000 0 100%,
+        transparent 101%
+      ),
+    radial-gradient(
+        ellipse 1.5% 70% at 37% 100%,
+        #8f0505 0 100%,
+        transparent 101%
+      ),
+    radial-gradient(
+        ellipse 2% 40% at 56% 100%,
+        #6e0000 0 100%,
+        transparent 101%
+      ),
+    radial-gradient(
+        ellipse 1.6% 62% at 64% 100%,
+        #a30b0b 0 100%,
+        transparent 101%
+      ),
+    radial-gradient(
+        ellipse 2.2% 46% at 79% 100%,
+        #7a0000 0 100%,
+        transparent 101%
+      ),
+    radial-gradient(
+        ellipse 1.8% 34% at 91% 100%,
+        #6e0000 0 100%,
+        transparent 101%
+      ),
+    /* pool */
+    radial-gradient(
+        ellipse 26% 16% at 14% 100%,
+        #7f0000 0 100%,
+        transparent 101%
+      ),
+    radial-gradient(
+        ellipse 30% 20% at 46% 100%,
+        #8f0505 0 100%,
+        transparent 101%
+      ),
+    radial-gradient(
+        ellipse 24% 14% at 82% 100%,
+        #7a0000 0 100%,
+        transparent 101%
+      ),
+    linear-gradient(0deg, #6e0000 0 12%, #8f0505 20%, transparent 34%);
+  background-size: 100% 1.2em;
+  background-size: 100% 1lh;
+  background-repeat: repeat-y;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 12px rgba(150, 0, 0, 0.5));
 }
 
 html,
@@ -12,4 +108,8 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+
+  /* hide scrollbars */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
