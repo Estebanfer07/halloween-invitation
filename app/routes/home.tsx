@@ -86,7 +86,7 @@ export function meta({}: Route.MetaArgs) {
     {
       property: "og:image",
       content:
-        "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_006.png",
+        "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_002.png",
     },
     { property: "og:site_name", content: "Invitación de Halloween" },
     { property: "og:image:width", content: "1024" },
@@ -102,7 +102,7 @@ export function meta({}: Route.MetaArgs) {
     {
       name: "twitter:image",
       content:
-        "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_006.png",
+        "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_002.png",
     },
   ];
 }
