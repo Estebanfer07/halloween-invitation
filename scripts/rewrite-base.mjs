@@ -11,11 +11,12 @@ import { join } from "node:path";
 const ROOT = process.argv[2] ?? "/halloween-invitation";
 const CLIENT = join(process.cwd(), "build", "client");
 
-const FROM = "/assets/";
 const TO = `${ROOT}/assets/`;
-const FROM_FAVICON = "/favicon.ico";
 const TO_FAVICON = `${ROOT}/favicon.ico`;
 const EXTS = new Set([".html", ".css", ".js"]);
+const escapedRoot = ROOT.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const assetPathPattern = new RegExp(`(?<!${escapedRoot})/assets/`, "g");
+const faviconPathPattern = new RegExp(`(?<!${escapedRoot})/favicon\\.ico`, "g");
 
 function rewrite(dir) {
   for (const entry of readdirSync(dir)) {
@@ -27,17 +28,12 @@ function rewrite(dir) {
     }
     if (!EXTS.has(entry.slice(entry.lastIndexOf(".")))) continue;
     let text = readFileSync(file, "utf8");
-    let changed = false;
-    if (text.includes(FROM)) {
-      text = text.split(FROM).join(TO);
-      changed = true;
-    }
-    if (text.includes(FROM_FAVICON)) {
-      text = text.split(FROM_FAVICON).join(TO_FAVICON);
-      changed = true;
-    }
+    const rewritten = text
+      .replace(assetPathPattern, TO)
+      .replace(faviconPathPattern, TO_FAVICON);
+    const changed = rewritten !== text;
     if (changed) {
-      writeFileSync(file, text);
+      writeFileSync(file, rewritten);
       console.log(`rewrote ${file.replace(process.cwd(), ".")}`);
     }
   }
@@ -55,4 +51,4 @@ if (statSync(nestedIndex, { throwIfNoEntry: false })) {
   rmSync(nested, { recursive: true, force: true });
   console.log(`promoted ${nested.replace(process.cwd(), ".")}/index.html -> ./index.html`);
 }
-console.log(`\nRewrote ${FROM} -> ${TO} in build/client`);
+console.log(`\nRewrote root-relative asset paths for ${ROOT} in build/client`);
