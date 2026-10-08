@@ -68,13 +68,15 @@ export function meta({}: Route.MetaArgs) {
     { title: "Invitación de Halloween" },
     {
       name: "description",
-      content: "Estás invitado a una fiesta de Halloween espeluznante!",
+      content:
+        "Estás invitado a una fiesta de Halloween espeluznante y divertida.",
     },
     // Open Graph
     { property: "og:title", content: "Invitación de Halloween" },
     {
       property: "og:description",
-      content: "Estás invitado a una fiesta de Halloween espeluznante!",
+      content:
+        "Estás invitado a una fiesta de Halloween espeluznante y divertida.",
     },
     { property: "og:type", content: "website" },
     {
@@ -83,18 +85,24 @@ export function meta({}: Route.MetaArgs) {
     },
     {
       property: "og:image",
-      content: "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_006.png",
+      content:
+        "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_006.png",
     },
+    { property: "og:site_name", content: "Invitación de Halloween" },
+    { property: "og:image:width", content: "1024" },
+    { property: "og:image:height", content: "1024" },
     // Twitter
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: "Invitación de Halloween" },
     {
       name: "twitter:description",
-      content: "Estás invitado a una fiesta de Halloween espeluznante!",
+      content:
+        "Estás invitado a una fiesta de Halloween espeluznante y divertida.",
     },
     {
       name: "twitter:image",
-      content: "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_006.png",
+      content:
+        "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_006.png",
     },
   ];
 }
