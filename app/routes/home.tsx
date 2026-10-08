@@ -62,6 +62,7 @@ const SECTIONS: Section[] = [
 ];
 
 const SECTIONS_SCROLL = 60;
+const SOCIAL_IMAGE_URL = `${ASSETS}images/og-2.png`;
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -85,12 +86,12 @@ export function meta({}: Route.MetaArgs) {
     },
     {
       property: "og:image",
-      content:
-        "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_002.png",
+      content: SOCIAL_IMAGE_URL,
     },
     { property: "og:site_name", content: "Invitación de Halloween" },
-    { property: "og:image:width", content: "1024" },
-    { property: "og:image:height", content: "1024" },
+    { property: "og:image:width", content: "1290" },
+    { property: "og:image:height", content: "1620" },
+    { property: "og:image:type", content: "image/png" },
     // Twitter
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: "Invitación de Halloween" },
@@ -101,8 +102,7 @@ export function meta({}: Route.MetaArgs) {
     },
     {
       name: "twitter:image",
-      content:
-        "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_002.png",
+      content: SOCIAL_IMAGE_URL,
     },
   ];
 }
