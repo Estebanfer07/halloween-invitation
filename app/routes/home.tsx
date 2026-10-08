@@ -70,6 +70,32 @@ export function meta({}: Route.MetaArgs) {
       name: "description",
       content: "Estás invitado a una fiesta de Halloween espeluznante!",
     },
+    // Open Graph
+    { property: "og:title", content: "Invitación de Halloween" },
+    {
+      property: "og:description",
+      content: "Estás invitado a una fiesta de Halloween espeluznante!",
+    },
+    { property: "og:type", content: "website" },
+    {
+      property: "og:url",
+      content: "https://estebanfer07.github.io/halloween-invitation/",
+    },
+    {
+      property: "og:image",
+      content: "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_006.png",
+    },
+    // Twitter
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: "Invitación de Halloween" },
+    {
+      name: "twitter:description",
+      content: "Estás invitado a una fiesta de Halloween espeluznante!",
+    },
+    {
+      name: "twitter:image",
+      content: "https://estebanfer07.github.io/halloween-invitation/assets/sprites/clown/frame_006.png",
+    },
   ];
 }
 
