@@ -217,7 +217,6 @@ export default function Home() {
           0.2,
         );
       }
-
     },
     { scope: containerRef },
   );
@@ -229,6 +228,8 @@ export default function Home() {
       style={{ height: `${SECTIONS.length * SECTIONS_SCROLL}vh` }}
     >
       <div className="sticky top-0 h-dvh w-dvw overflow-hidden flex items-center justify-center">
+        {/* for mobile compatibility transform video with ffmpeg: ffmpeg -i input.mp4 -c copy -movflags +faststart output.mp4 */}
+        {/* and also add autoPlay */}
         <video
           ref={videoRef}
           className="h-dvh w-full object-cover"
@@ -288,7 +289,7 @@ export default function Home() {
               <button
                 data-reveal
                 type="button"
-                className="pointer-events-auto mt-8 rounded-full border border-red-800/70 bg-red-950/40 px-8 py-3 font-display text-base uppercase tracking-[0.1em] text-red-200/90 backdrop-blur-sm transition hover:bg-red-800/40 hover:text-[#f3e7d8]"
+                className="pointer-events-auto mt-8 rounded-full border border-red-800/70 bg-red-950/40 px-8 py-3 font-display text-base uppercase tracking-widest text-red-200/90 backdrop-blur-sm transition hover:bg-red-800/40 hover:text-[#f3e7d8]"
               >
                 {section.cta}
               </button>
