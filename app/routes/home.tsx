@@ -62,7 +62,10 @@ const SECTIONS: Section[] = [
 ];
 
 const SECTIONS_SCROLL = 60;
-const SOCIAL_IMAGE_URL = `${ASSETS}images/og-2.png`;
+const SITE_URL = import.meta.env.VITE_SITE_URL;
+const SOCIAL_IMAGE_URL = SITE_URL
+  ? new URL("assets/images/og-2.png", SITE_URL).href
+  : `${ASSETS}images/og-2.png`;
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -82,7 +85,7 @@ export function meta({}: Route.MetaArgs) {
     { property: "og:type", content: "website" },
     {
       property: "og:url",
-      content: "https://estebanfer07.github.io/halloween-invitation/",
+      content: SITE_URL || import.meta.env.BASE_URL,
     },
     {
       property: "og:image",
@@ -117,19 +120,6 @@ export default function Home() {
   useGSAP(
     () => {
       const video = videoRef.current;
-      if (video) {
-        // Show the first frame on iOS (which won't decode one until a play
-        // attempt) without letting the video run on its own.
-        const kick = async () => {
-          try {
-            await video.play();
-            video.pause();
-            video.currentTime = 0;
-          } catch {}
-        };
-        if (video.readyState >= 2) kick();
-        else video.addEventListener("loadeddata", kick, { once: true });
-      }
 
       const panels = gsap.utils.toArray<HTMLElement>("[data-panel]");
       const total = panels.length;
@@ -228,7 +218,6 @@ export default function Home() {
         );
       }
 
-      return () => {};
     },
     { scope: containerRef },
   );
@@ -240,15 +229,13 @@ export default function Home() {
       style={{ height: `${SECTIONS.length * SECTIONS_SCROLL}vh` }}
     >
       <div className="sticky top-0 h-dvh w-dvw overflow-hidden flex items-center justify-center">
-        {/* for mobile compatibility transform video with ffmpeg: ffmpeg -i input.mp4 -c copy -movflags +faststart output.mp4 */}
-        {/* and also add autoPlay */}
         <video
           ref={videoRef}
           className="h-dvh w-full object-cover"
           muted
           playsInline
-          preload="auto"
-          autoPlay
+          preload="metadata"
+          // autoPlay
         >
           <source src={`${ASSETS}videos/circus-bg-opt.mp4`} type="video/mp4" />
         </video>

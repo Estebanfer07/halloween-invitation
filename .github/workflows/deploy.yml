@@ -32,6 +32,8 @@ jobs:
 
       - name: Build
         run: yarn build
+        env:
+          VITE_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
 
       - name: Rewrite base path for GitHub Pages
         run: node scripts/rewrite-base.mjs
