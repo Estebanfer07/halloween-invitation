@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 const ASSETS = `${import.meta.env.BASE_URL}assets/`;
 
@@ -81,28 +82,19 @@ export default function Home() {
 
   useGSAP(
     () => {
-      let cleanup: (() => void) | undefined;
       const video = videoRef.current;
       if (video) {
-        gsap.to(video, {
-          currentTime: () => video.duration || 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        const refresh = () => ScrollTrigger.refresh();
-        if (video.readyState >= 1) {
-          refresh();
-        } else {
-          video.addEventListener("loadedmetadata", refresh);
-          cleanup = () => video.removeEventListener("loadedmetadata", refresh);
-        }
+        // Show the first frame on iOS (which won't decode one until a play
+        // attempt) without letting the video run on its own.
+        const kick = async () => {
+          try {
+            await video.play();
+            video.pause();
+            video.currentTime = 0;
+          } catch {}
+        };
+        if (video.readyState >= 2) kick();
+        else video.addEventListener("loadeddata", kick, { once: true });
       }
 
       const panels = gsap.utils.toArray<HTMLElement>("[data-panel]");
@@ -184,7 +176,16 @@ export default function Home() {
             clown.src = frames[idx];
           }
         };
-        master.eventCallback("onUpdate", () => swapFrame(master.time()));
+        master.eventCallback("onUpdate", () => {
+          swapFrame(master.time());
+          if (video?.duration) {
+            video.currentTime = gsap.utils.clamp(
+              0,
+              video.duration,
+              master.progress() * video.duration,
+            );
+          }
+        });
 
         master.to(
           clown,
@@ -193,7 +194,7 @@ export default function Home() {
         );
       }
 
-      return () => cleanup?.();
+      return () => {};
     },
     { scope: containerRef },
   );
