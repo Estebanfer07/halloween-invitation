@@ -206,14 +206,17 @@ export default function Home() {
       style={{ height: `${SECTIONS.length * SECTIONS_SCROLL}vh` }}
     >
       <div className="sticky top-0 h-dvh w-dvw overflow-hidden flex items-center justify-center">
+        {/* for mobile compatibility transform video with ffmpeg: ffmpeg -i input.mp4 -c copy -movflags +faststart output.mp4 */}
+        {/* and also add autoPlay */}
         <video
           ref={videoRef}
           className="h-dvh w-full object-cover"
           muted
           playsInline
           preload="auto"
+          autoPlay
         >
-          <source src={`${ASSETS}videos/circus-background.mp4`} type="video/mp4" />
+          <source src={`${ASSETS}videos/circus-bg-opt.mp4`} type="video/mp4" />
         </video>
 
         <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-black/30 to-black/80" />
