@@ -45,7 +45,7 @@
         transparent 101%
       ),
     /* drips */
-    radial-gradient(
+    /*radial-gradient(
         ellipse 1.8% 58% at 24% 100%,
         #7f0000 0 100%,
         transparent 101%
@@ -74,7 +74,7 @@
         ellipse 1.8% 34% at 91% 100%,
         #6e0000 0 100%,
         transparent 101%
-      ),
+      ),*/
     /* pool */
     radial-gradient(
         ellipse 26% 16% at 14% 100%,

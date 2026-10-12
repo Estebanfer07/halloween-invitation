@@ -10,9 +10,9 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 const ASSETS = `${import.meta.env.BASE_URL}assets/`;
 
 const EVENT = {
-  date: "Sabado 31 de octubre",
-  time: "9:00 PM & Hasta la hora de las brujas",
-  location: "El Circo de Medianoche & Calle Ravenwood 13",
+  date: "Viernes 30 de octubre",
+  time: "8:00 PM",
+  location: "En el valle de los chillos",
 };
 
 type Section = {
@@ -26,38 +26,27 @@ type Section = {
 const SECTIONS: Section[] = [
   {
     id: "opening",
-    title: "BIENVENIDO AL ESPECTACULO",
-    subtitle: "Algo siniestro te espera dentro...",
+    title: "Damas y Caballeros",
+    detail: "Bienvenidos al espetaculo de fenomenos"
   },
   {
     id: "invitation",
-    title: "ESTAS INVITADO",
-    subtitle: "A una noche donde lo inesperado es parte del espectaculo.",
+    title: "Donde nada es lo que parece",
+    detail: "Y tus pesadillas se hacen realidad",
   },
-  { id: "date", title: "LA NOCHE", detail: EVENT.date },
-  { id: "time", title: "EL ESPECTACULO COMIENZA", detail: EVENT.time },
-  { id: "location", title: "EL CIRCO ESPERA", detail: EVENT.location },
-  {
-    id: "dress",
-    title: "VISTE PARA IMPRESIONAR",
-    subtitle: "Ven vestido para la ocasion.",
-  },
-  {
-    id: "warning",
-    title: "PERO RECUERDA",
-    subtitle: "NO TODO AQUI ES PARTE DEL ESPECTACULO.",
-  },
+  { id: "time", title: "El telon se abre", detail: EVENT.date },
+  { id: "date", title: "A partir de las", detail: EVENT.time },
+  { id: "location", title: "Encuentra la carpa", detail: EVENT.location },
+  
+  
   {
     id: "final",
-    title: "EL ESPECTACULO ESTA POR COMENZAR",
-    subtitle: "TE UNES A NOSOTROS?",
+    title: "El espectaculo esta por comenzar",
   },
   {
     id: "rsvp",
-    title: "CONFIRMA TU ASISTENCIA",
-    subtitle: "Esperamos asustarte en esta noche de terror y diversion.",
-    // subtitle: "Cuentanos si podras venir.",
-    // cta: "AHI ESTARE",
+    title: "Te atreves a entrar?",
+    detail: "Confirma tu asistencia",
   },
 ];
 
@@ -138,7 +127,9 @@ export default function Home() {
       const PANELS_START = 1;
 
       panels.forEach((panel, i) => {
-        const reveals = gsap.utils.toArray<HTMLElement>("[data-reveal]", panel);
+        const titleReveal = gsap.utils.toArray<HTMLElement>("[data-reveal-title]", panel);
+        const detailReveal = gsap.utils.toArray<HTMLElement>("[data-reveal-detail]", panel);
+        const subtitleReveal = gsap.utils.toArray<HTMLElement>("[data-reveal-subtitle]", panel);
 
         master.fromTo(
           panel,
@@ -147,15 +138,21 @@ export default function Home() {
           PANELS_START + i,
         );
 
-        reveals.forEach((el, j) => {
+        
           master.fromTo(
-            el,
-            { autoAlpha: 0, y: 28 },
-            { autoAlpha: 1, y: 0, duration: 0.14 },
-            PANELS_START + i + 0.05 + j * 0.22,
+            "[data-reveal-title]",
+            { autoAlpha: 0, y: -100 },
+            { autoAlpha: 1, y: 0, duration: 0.24 },
+            PANELS_START + i + 0.05,
           );
-        });
 
+          master.fromTo(
+            "[data-reveal-detail]",
+            { autoAlpha: 0, y: 50 },
+            { autoAlpha: 1, y: 0, duration: 0.14 },
+            PANELS_START + i + 0.10,
+          );
+        
         if (i < total - 1) {
           master.to(
             panel,
@@ -261,7 +258,7 @@ export default function Home() {
             className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center opacity-0"
           >
             <h2
-              data-reveal
+              data-reveal-title
               className="blood-text font-display text-6xl uppercase tracking-[0.06em] sm:text-6xl"
             >
               {section.title}
@@ -269,8 +266,8 @@ export default function Home() {
 
             {section.detail && (
               <p
-                data-reveal
-                className="blood-text mt-5 font-display text-4xl uppercase tracking-[0.06em] sm:text-5xl"
+                data-reveal-detail
+                className="blood-text mt-5 font-display text-2xl uppercase tracking-[0.06em] sm:text-5xl"
               >
                 {section.detail}
               </p>
@@ -278,8 +275,8 @@ export default function Home() {
 
             {section.subtitle && (
               <p
-                data-reveal
-                className="mt-4 max-w-[34ch] text-sm uppercase tracking-[0.3em] text-[#e6d9c9]/75 sm:text-base"
+                data-reveal-subtitle
+                className="mt-4 max-w-[34ch] font-display text-4xl uppercase tracking-[0.3em] text-[#e6d9c9]/75 sm:text-base"
               >
                 {section.subtitle}
               </p>
@@ -301,7 +298,7 @@ export default function Home() {
           ref={hintRef}
           className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.4em] text-white/80 [text-shadow:0_0_12px_rgba(0,0,0,0.9)]">
+          <span className="text-sm font-semibold uppercase tracking-[0.4em] text-white/80 [text-shadow:0_0_12px_rgba(0,0,0,0.9)]">
             Desliza para entrar
           </span>
           <svg
