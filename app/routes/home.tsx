@@ -267,7 +267,7 @@ export default function Home() {
             {section.detail && (
               <p
                 data-reveal-detail
-                className="blood-text mt-5 font-display text-2xl uppercase tracking-[0.06em] sm:text-5xl"
+                className="blood-text mt-5 font-display text-4xl uppercase tracking-[0.06em] sm:text-5xl"
               >
                 {section.detail}
               </p>
