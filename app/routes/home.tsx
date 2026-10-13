@@ -138,21 +138,27 @@ export default function Home() {
           PANELS_START + i,
         );
 
-        
-          master.fromTo(
-            "[data-reveal-title]",
-            { autoAlpha: 0, y: -100 },
-            { autoAlpha: 1, y: 0, duration: 0.24 },
-            PANELS_START + i + 0.05,
-          );
+        master.fromTo(
+          titleReveal,
+          { autoAlpha: 0, y: -100 },
+          { autoAlpha: 1, y: 0, duration: 0.24 },
+          PANELS_START + i + 0.05,
+        );
 
-          master.fromTo(
-            "[data-reveal-detail]",
-            { autoAlpha: 0, y: 50 },
-            { autoAlpha: 1, y: 0, duration: 0.14 },
-            PANELS_START + i + 0.10,
-          );
-        
+        master.fromTo(
+          detailReveal,
+          { autoAlpha: 0, y: 50 },
+          { autoAlpha: 1, y: 0, duration: 0.14 },
+          PANELS_START + i + 0.10,
+        );
+
+        master.fromTo(
+          subtitleReveal,
+          { autoAlpha: 0, y: 50 },
+          { autoAlpha: 1, y: 0, duration: 0.14 },
+          PANELS_START + i + 0.10,
+        );
+
         if (i < total - 1) {
           master.to(
             panel,

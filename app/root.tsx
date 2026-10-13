@@ -42,6 +42,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <a
+          href="https://www.flaticon.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-3 right-3 z-50 text-xs text-white/70 underline-offset-2 hover:text-white hover:underline"
+        >
+          Icons by Flaticon
+        </a>
         <ScrollRestoration />
         <Scripts />
       </body>
