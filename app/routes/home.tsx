@@ -397,6 +397,7 @@ export default function Home() {
         kind: "success",
         message: `¡Gracias, ${name}! Tu asistencia quedó confirmada.`,
       });
+      setRsvpOpen(false);
     } catch (error) {
       console.error("Could not save RSVP", error);
       setRsvpStatus({
