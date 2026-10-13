@@ -34,6 +34,12 @@ npm run dev
 
 Your application will be available at `http://localhost:5173`.
 
+## Supabase RSVP setup
+
+1. Your existing `public.guests` table needs `name` and a numeric `icon` column. In the Supabase SQL Editor, run [`supabase/guests.sql`](supabase/guests.sql) to assign icons to existing guests without one, add sequential assignment for new guests, and create a public RPC for the RSVP display. The public site displays guest names and icons, so those names are visible to anyone who visits it. The script does not recreate the table.
+2. Copy `.env.example` to `.env` and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` from your Supabase project. A legacy `anon` key can also be used as the public key. Never put a service-role key in a `VITE_` variable.
+3. For production builds (including GitHub Pages), set those same variables in the build environment before running `npm run build`.
+
 ## Building for Production
 
 Create a production build:
