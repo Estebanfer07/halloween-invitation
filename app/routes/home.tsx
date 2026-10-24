@@ -11,8 +11,8 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 const ASSETS = `${import.meta.env.BASE_URL}assets/`;
 
 const EVENT = {
-  date: "Viernes 30 de octubre",
-  time: "8:00 PM",
+  date: "Sabado 31 de octubre",
+  time: "6:00 PM",
   location: "En el valle de los chillos",
 };
 
