@@ -13,7 +13,7 @@ const ASSETS = `${import.meta.env.BASE_URL}assets/`;
 const EVENT = {
   date: "Sabado 31 de octubre",
   time: "6:00 PM",
-  location: "En el valle de los chillos",
+  location: "En el valle de los 🔪🔪🔪",
 };
 
 type Section = {
