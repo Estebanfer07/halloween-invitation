@@ -7,6 +7,13 @@ import "./manuel.css";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const ASSETS = `${import.meta.env.BASE_URL}assets/images/bbq/`;
+const SITE_URL = import.meta.env.VITE_SITE_URL;
+const SOCIAL_IMAGE_URL = SITE_URL
+  ? new URL(
+      "assets/images/bbq/parrillada.png",
+      SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`,
+    ).href
+  : `${ASSETS}parrillada.png`;
 const MAP_URL = "https://maps.app.goo.gl/Lrssoss8Zb2Swa878";
 
 const DETAILS = [
@@ -45,6 +52,28 @@ export function meta() {
         "Una nueva etapa merece una buena parrillada. 19 de noviembre en Quinta Los Mirlos.",
     },
     { property: "og:type", content: "website" },
+    { property: "og:image", content: SOCIAL_IMAGE_URL },
+    { property: "og:image:secure_url", content: SOCIAL_IMAGE_URL },
+    { property: "og:image:type", content: "image/png" },
+    { property: "og:image:width", content: "1797" },
+    { property: "og:image:height", content: "980" },
+    {
+      property: "og:image:alt",
+      content: "Ilustración de compañeros compartiendo una parrillada.",
+    },
+    { property: "og:site_name", content: "Invitación a la parrillada" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: "Una parrillada para Manuel Prieto" },
+    {
+      name: "twitter:description",
+      content:
+        "Una nueva etapa merece una buena parrillada. 19 de noviembre en Quinta Los Mirlos.",
+    },
+    { name: "twitter:image", content: SOCIAL_IMAGE_URL },
+    {
+      name: "twitter:image:alt",
+      content: "Ilustración de compañeros compartiendo una parrillada.",
+    },
   ];
 }
 
