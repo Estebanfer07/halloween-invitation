@@ -41,12 +41,16 @@ function rewrite(dir) {
 
 rewrite(CLIENT);
 
-// React Router writes the prerendered page under `<basename>/index.html`,
-// but GitHub Pages serves the artifact root; promote it so /index.html
-// (the page behind /halloween-invitation/) exists.
+// React Router writes prerendered pages under the configured basename, but
+// GitHub Pages serves the artifact root. Promote the basename's index and
+// retain any prerendered child routes at the matching artifact-root paths.
 const nested = join(CLIENT, ROOT.replace(/^\//, ""));
 const nestedIndex = join(nested, "index.html");
 if (statSync(nestedIndex, { throwIfNoEntry: false })) {
+  for (const entry of readdirSync(nested)) {
+    if (entry === "index.html") continue;
+    cpSync(join(nested, entry), join(CLIENT, entry), { recursive: true });
+  }
   cpSync(nestedIndex, join(CLIENT, "index.html"));
   rmSync(nested, { recursive: true, force: true });
   console.log(`promoted ${nested.replace(process.cwd(), ".")}/index.html -> ./index.html`);

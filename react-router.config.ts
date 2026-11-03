@@ -2,7 +2,7 @@ import type { Config } from "@react-router/dev/config";
 
 export default {
   ssr: true,
-  prerender: ["/"],
+  prerender: ["/", "/despedida-manu"],
   // Router must match the path the site is served from (/halloween-invitation/).
   // Vite `base` stays "/" so asset paths are rewritten to the Pages prefix later.
   basename: "/halloween-invitation",
