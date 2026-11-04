@@ -731,9 +731,9 @@
   }
 
   .bbq-confirmation-art {
-    width: clamp(190px, 80vw, 350px);
-    margin: 2rem 0 0.35rem;
-    transform: translateX(0) translateY(0);
+    width: clamp(190px, 55vw, 350px);
+    margin: 0.3rem 0 .35rem;
+    transform: translateX(-20px) translateY(0);
   }
 
   .bbq-confirmation-paper {
