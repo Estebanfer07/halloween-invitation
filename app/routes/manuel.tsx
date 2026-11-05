@@ -346,7 +346,7 @@ export default function ManuInvitation() {
   );
 
   return (
-    <main ref={containerRef} className="Manu-invite">
+    <main ref={containerRef} className="manuel-invite">
       <div ref={stageRef} className="bbq-stage">
         <div className="bbq-backdrop" aria-hidden="true" />
         <div className="bbq-glow bbq-glow--left" aria-hidden="true" />
