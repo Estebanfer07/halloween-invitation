@@ -80,6 +80,7 @@ export function meta() {
 export default function ManuelInvitation() {
   const containerRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const introVideoRef = useRef<HTMLVideoElement>(null);
 
   useGSAP(
     () => {
@@ -90,7 +91,10 @@ export default function ManuelInvitation() {
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
-      if (reduceMotion) return;
+      if (reduceMotion) {
+        introVideoRef.current?.pause();
+        return;
+      }
 
       const steak = stage.querySelector<HTMLElement>("[data-steak]");
       const grill = stage.querySelector<HTMLElement>("[data-grill]");
@@ -173,7 +177,11 @@ export default function ManuelInvitation() {
       });
 
       timeline.to(intro, { autoAlpha: 0, y: -24, duration: 0.55 }, 0.3);
-      timeline.to(introArt, { autoAlpha: 0, y: -14, scale: 0.96, duration: 0.55 }, 0.3);
+      timeline.to(
+        introArt,
+        { autoAlpha: 0, y: -14, scale: 0.96, duration: 0.55 },
+        0.3,
+      );
       timeline.to(steak, { autoAlpha: 1, duration: 0.14 }, 0.12);
       timeline.to(grill, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.8);
       timeline.to(
@@ -360,7 +368,7 @@ export default function ManuelInvitation() {
             siempre.
           </p>
           <div className="bbq-scroll-cue" aria-hidden="true">
-            <span>Desliza para ver la invitación</span>
+            <span>Desliza lentamente para ver la invitación</span>
             <span className="bbq-scroll-arrow">↓</span>
           </div>
         </header>
@@ -369,17 +377,20 @@ export default function ManuelInvitation() {
           className="bbq-preparate-art"
           data-intro-art
           role="img"
-          aria-label="Dos compañeros en una escena graciosa, con el mensaje: Tu momento ha llegado"
+          aria-label="Video de un compañero enviando un beso, con la frase: Besito de bienvenida a mi despedida"
         >
-          <img
-            src={`${ASSETS}preparate.webp`}
-            alt=""
-            draggable="false"
-            width={512}
-            height={512}
+          <video
+            ref={introVideoRef}
+            src={`${ASSETS}bye-kiss-clip.mp4`}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            aria-hidden="true"
           />
           <span className="bbq-preparate-label" aria-hidden="true">
-            Tu momento ha llegado
+            Besito de bienvenida a mi despedida
           </span>
         </div>
 
@@ -464,7 +475,7 @@ export default function ManuelInvitation() {
           <p className="bbq-kicker">Una despedida a la parrilla</p>
           <h2 id="final-title">¡Muchos Éxitos Manu!</h2>
           <p className="bbq-final-details">
-            <strong>19 de noviembre</strong>
+            <strong>19 de noviembre · 13:00</strong>
             <span>Quinta Los Mirlos · Valle de los Chillos</span>
           </p>
           <a

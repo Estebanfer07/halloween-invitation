@@ -231,7 +231,7 @@
 .bbq-preparate-art {
   position: absolute;
   z-index: 3;
-  top: 34%;
+  top: 42%;
   right: clamp(1rem, -10vw, -10rem);
   width: clamp(170px, 30vw, 450px);
   aspect-ratio: 1;
@@ -240,34 +240,36 @@
   user-select: none;
 }
 
-.bbq-preparate-art > img {
+.bbq-preparate-art > video {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  border-radius: 1rem;
+  object-fit: contain;
 }
 
 .bbq-preparate-label {
   position: absolute;
-  top: 14%;
-  left: 24%;
+  bottom: -0.45rem;
+  left: 50%;
   display: flex;
-  width: 54%;
-  height: 12%;
+  width: max-content;
+  max-width: 96%;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(78 59 48 / 14%);
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgb(78 59 48 / 22%);
   border-radius: 999px;
   background: #fffefa;
   box-shadow: 0 2px 5px rgb(28 20 15 / 25%);
   color: #171411;
-  font-size: clamp(6px, 5vw, 14px);
+  font-size: clamp(9px, 1.4vw, 14px);
   font-weight: 750;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
-  transform: rotate(-32deg);
-  transform-origin: center;
+  transform: translateX(-50%) rotate(-2deg);
 }
 
 .bbq-story {
@@ -672,7 +674,7 @@
 
   .bbq-scroll-cue {
     margin-top: 1.3rem;
-    font-size: 0.55rem;
+    font-size: 0.75rem;
   }
 
   .bbq-preparate-art {
@@ -683,7 +685,8 @@
   }
 
   .bbq-preparate-label {
-    font-size: clamp(5.5px, 5vw, 15px);
+    bottom: -0.4rem;
+    font-size: clamp(9px, 3vw, 12px);
   }
 
   .bbq-detail {
@@ -732,7 +735,7 @@
 
   .bbq-confirmation-art {
     width: clamp(190px, 55vw, 350px);
-    margin: 0.3rem 0 .35rem;
+    margin: 0.3rem 0 0.35rem;
     transform: translateX(-20px) translateY(0);
   }
 
