@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "./manuel.css";
+import "./Manu.css";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -21,7 +21,7 @@ const DETAILS = [
     id: "reason",
     eyebrow: "El motivo",
     title: "Un ascenso merece una buena parrillada.",
-    copy: "Celebramos el nuevo reto de Manuel y brindamos por todo lo que viene.",
+    copy: "Celebramos el nuevo reto de Manu y brindamos por todo lo que viene.",
   },
   {
     id: "date",
@@ -39,13 +39,13 @@ const DETAILS = [
 
 export function meta() {
   return [
-    { title: "Parrillada de despedida para Manuel Prieto" },
+    { title: "Parrillada de despedida para Manu Prieto" },
     {
       name: "description",
       content:
-        "Celebremos el ascenso de Manuel Prieto con una parrillada en Quinta Los Mirlos, Valle de los Chillos, el 19 de noviembre.",
+        "Celebremos el ascenso de Manu Prieto con una parrillada en Quinta Los Mirlos, Valle de los Chillos, el 19 de noviembre.",
     },
-    { property: "og:title", content: "Una parrillada para Manuel Prieto" },
+    { property: "og:title", content: "Una parrillada para Manu Prieto" },
     {
       property: "og:description",
       content:
@@ -63,7 +63,7 @@ export function meta() {
     },
     { property: "og:site_name", content: "Invitación a la parrillada" },
     { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: "Una parrillada para Manuel Prieto" },
+    { name: "twitter:title", content: "Una parrillada para Manu Prieto" },
     {
       name: "twitter:description",
       content:
@@ -77,7 +77,7 @@ export function meta() {
   ];
 }
 
-export default function ManuelInvitation() {
+export default function ManuInvitation() {
   const containerRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const introVideoRef = useRef<HTMLVideoElement>(null);
@@ -346,7 +346,7 @@ export default function ManuelInvitation() {
   );
 
   return (
-    <main ref={containerRef} className="manuel-invite">
+    <main ref={containerRef} className="Manu-invite">
       <div ref={stageRef} className="bbq-stage">
         <div className="bbq-backdrop" aria-hidden="true" />
         <div className="bbq-glow bbq-glow--left" aria-hidden="true" />
@@ -360,7 +360,7 @@ export default function ManuelInvitation() {
         <header className="bbq-intro" data-intro>
           <p className="bbq-kicker">Una nueva etapa se celebra</p>
           <h1>
-            Manuel
+            Manu
             <span>Prieto</span>
           </h1>
           <p className="bbq-intro-copy">
